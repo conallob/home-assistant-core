@@ -1,7 +1,5 @@
 """Support for Jewish calendar sensors."""
 
-from __future__ import annotations
-
 from collections.abc import Callable
 from dataclasses import dataclass
 import datetime as dt
@@ -42,8 +40,8 @@ class JewishCalendarSensorDescription(JewishCalendarBaseSensorDescription):
     value_fn: Callable[[HDateInfo], str | int]
     attr_fn: Callable[[HDateInfo], dict[str, str]] | None = None
     options_fn: Callable[[bool], list[str]] | None = None
-    next_update_fn: Callable[[Zmanim], dt.datetime | None] | None = (
-        lambda zmanim: zmanim.shkia.local
+    next_update_fn: Callable[[Zmanim], dt.datetime | None] | None = lambda zmanim: (
+        zmanim.shkia.local
     )
 
 
@@ -90,6 +88,9 @@ INFO_SENSORS: tuple[JewishCalendarSensorDescription, ...] = (
                 dict.fromkeys(_holiday.type.name for _holiday in info.holidays)
             ),
         },
+        next_update_fn=lambda zmanim: (
+            zmanim.candle_lighting or zmanim.havdalah or zmanim.shkia.local
+        ),
     ),
     JewishCalendarSensorDescription(
         key="omer_count",
@@ -178,9 +179,9 @@ TIME_SENSORS: tuple[JewishCalendarTimestampSensorDescription, ...] = (
         key="upcoming_shabbat_candle_lighting",
         translation_key="upcoming_shabbat_candle_lighting",
         entity_registry_enabled_default=False,
-        value_fn=lambda at_date, mz: mz(
-            at_date.upcoming_shabbat.previous_day.gdate
-        ).candle_lighting,
+        value_fn=lambda at_date, mz: (
+            mz(at_date.upcoming_shabbat.previous_day.gdate).candle_lighting
+        ),
         next_update_fn=lambda zmanim: zmanim.havdalah,
     ),
     JewishCalendarTimestampSensorDescription(
@@ -193,17 +194,19 @@ TIME_SENSORS: tuple[JewishCalendarTimestampSensorDescription, ...] = (
     JewishCalendarTimestampSensorDescription(
         key="upcoming_candle_lighting",
         translation_key="upcoming_candle_lighting",
-        value_fn=lambda at_date, mz: mz(
-            at_date.upcoming_shabbat_or_yom_tov.first_day.previous_day.gdate
-        ).candle_lighting,
+        value_fn=lambda at_date, mz: (
+            mz(
+                at_date.upcoming_shabbat_or_yom_tov.first_day.previous_day.gdate
+            ).candle_lighting
+        ),
         next_update_fn=lambda zmanim: zmanim.havdalah,
     ),
     JewishCalendarTimestampSensorDescription(
         key="upcoming_havdalah",
         translation_key="upcoming_havdalah",
-        value_fn=lambda at_date, mz: mz(
-            at_date.upcoming_shabbat_or_yom_tov.last_day.gdate
-        ).havdalah,
+        value_fn=lambda at_date, mz: (
+            mz(at_date.upcoming_shabbat_or_yom_tov.last_day.gdate).havdalah
+        ),
         next_update_fn=lambda zmanim: zmanim.havdalah,
     ),
 )

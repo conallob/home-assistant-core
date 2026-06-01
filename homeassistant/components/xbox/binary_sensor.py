@@ -1,7 +1,5 @@
 """Xbox friends binary sensors."""
 
-from __future__ import annotations
-
 from collections.abc import Callable
 from dataclasses import dataclass
 from enum import StrEnum
@@ -112,7 +110,7 @@ async def async_setup_entry(
     async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
     """Set up Xbox Live friends."""
-    coordinator = entry.runtime_data.status
+    coordinator = entry.runtime_data.presence
 
     if TYPE_CHECKING:
         assert entry.unique_id

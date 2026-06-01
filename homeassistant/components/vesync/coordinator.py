@@ -1,15 +1,14 @@
 """Class to manage VeSync data updates."""
 
-from __future__ import annotations
-
 from datetime import datetime, timedelta
 import logging
 
 from pyvesync import VeSync
+from pyvesync.utils.errors import VeSyncError
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .const import UPDATE_INTERVAL, UPDATE_INTERVAL_ENERGY
 
@@ -49,10 +48,12 @@ class VeSyncDataCoordinator(DataUpdateCoordinator[None]):
 
     async def _async_update_data(self) -> None:
         """Fetch data from API endpoint."""
+        try:
+            await self.manager.update_all_devices()
 
-        await self.manager.update_all_devices()
-
-        if self.should_update_energy():
-            self.update_time = datetime.now()
-            for outlet in self.manager.devices.outlets:
-                await outlet.update_energy()
+            if self.should_update_energy():
+                self.update_time = datetime.now()
+                for outlet in self.manager.devices.outlets:
+                    await outlet.update_energy()
+        except VeSyncError as err:
+            raise UpdateFailed(f"The service is unavailable: {err}") from err

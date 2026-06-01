@@ -1,7 +1,5 @@
 """Const for Sonos."""
 
-from __future__ import annotations
-
 import datetime
 
 from homeassistant.components.media_player import MediaClass, MediaType
@@ -212,3 +210,4 @@ BATTERY_SCAN_INTERVAL = datetime.timedelta(minutes=15)
 SCAN_INTERVAL = datetime.timedelta(seconds=10)
 DISCOVERY_INTERVAL = datetime.timedelta(seconds=60)
 SUBSCRIPTION_TIMEOUT = 1200
+LONG_SERVICE_TIMEOUT = 30.0

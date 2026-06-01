@@ -1,15 +1,11 @@
 """Module to handle installing requirements."""
 
-from __future__ import annotations
-
 import asyncio
 from collections.abc import Iterable
 import contextlib
 import logging
 import os
 from typing import Any
-
-from packaging.requirements import Requirement
 
 from .core import HomeAssistant, callback
 from .exceptions import HomeAssistantError
@@ -260,8 +256,13 @@ class RequirementsManager:
         """
         if DEPRECATED_PACKAGES or self.hass.config.skip_pip_packages:
             all_requirements = {
-                requirement_string: Requirement(requirement_string)
+                requirement_string: requirement_details
                 for requirement_string in requirements
+                if (
+                    requirement_details := pkg_util.parse_requirement_safe(
+                        requirement_string
+                    )
+                )
             }
             if DEPRECATED_PACKAGES:
                 for requirement_string, requirement_details in all_requirements.items():
@@ -272,9 +273,12 @@ class RequirementsManager:
                             "" if is_built_in else "custom ",
                             name,
                             f"has requirement '{requirement_string}' which {reason}",
-                            f"This will stop working in Home Assistant {breaks_in_ha_version}, please"
-                            if breaks_in_ha_version
-                            else "Please",
+                            (
+                                "This will stop working in Home Assistant "
+                                f"{breaks_in_ha_version}, please"
+                                if breaks_in_ha_version
+                                else "Please"
+                            ),
                             async_suggest_report_issue(
                                 self.hass, integration_domain=name
                             ),

@@ -132,7 +132,7 @@ class PlaystationNetworkConfigFlow(ConfigFlow, domain=DOMAIN):
                 user = await psn.get_user()
             except PSNAWPAuthenticationError:
                 errors["base"] = "invalid_auth"
-            except (PSNAWPNotFoundError, PSNAWPInvalidTokenError):
+            except PSNAWPNotFoundError, PSNAWPInvalidTokenError:
                 errors["base"] = "invalid_account"
             except PSNAWPError:
                 errors["base"] = "cannot_connect"
@@ -148,7 +148,7 @@ class PlaystationNetworkConfigFlow(ConfigFlow, domain=DOMAIN):
                     }
                 )
 
-                return self.async_update_reload_and_abort(
+                return self.async_update_and_abort(
                     entry,
                     data_updates={CONF_NPSSO: npsso},
                 )

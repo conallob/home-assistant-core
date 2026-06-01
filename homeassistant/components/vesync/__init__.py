@@ -64,14 +64,17 @@ async def async_setup_entry(
     try:
         await manager.login()
     except VeSyncLoginError as err:
+        # pylint: disable-next=home-assistant-exception-translation-key-missing
         raise ConfigEntryAuthFailed(
             translation_domain=DOMAIN, translation_key="invalid_auth"
         ) from err
     except VeSyncServerError as err:
+        # pylint: disable-next=home-assistant-exception-translation-key-missing
         raise ConfigEntryNotReady(
             translation_domain=DOMAIN, translation_key="server_error"
         ) from err
     except VeSyncAPIResponseError as err:
+        # pylint: disable-next=home-assistant-exception-translation-key-missing
         raise ConfigEntryNotReady(
             translation_domain=DOMAIN, translation_key="api_response_error"
         ) from err
@@ -80,6 +83,14 @@ async def async_setup_entry(
     await manager.check_firmware()
 
     config_entry.runtime_data = VeSyncDataCoordinator(hass, config_entry, manager)
+
+    # Complete version migration now that we have the account_id
+    if config_entry.minor_version == 2:
+        hass.config_entries.async_update_entry(
+            config_entry,
+            unique_id=manager.account_id,
+            minor_version=3,
+        )
 
     await hass.config_entries.async_forward_entry_setups(config_entry, PLATFORMS)
 
@@ -112,7 +123,8 @@ async def async_migrate_entry(
                 Platform.SWITCH
             ):
                 _LOGGER.debug(
-                    "Migrating switch/outlet entity from unique_id: %s to unique_id: %s",
+                    "Migrating switch/outlet entity"
+                    " from unique_id: %s to unique_id: %s",
                     reg_entry.unique_id,
                     reg_entry.unique_id + "-device_status",
                 )
@@ -123,7 +135,6 @@ async def async_migrate_entry(
             else:
                 _LOGGER.debug("Skipping entity with unique_id: %s", reg_entry.unique_id)
         hass.config_entries.async_update_entry(config_entry, minor_version=2)
-
     return True
 
 

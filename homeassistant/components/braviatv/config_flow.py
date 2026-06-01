@@ -1,7 +1,5 @@
 """Config flow to configure the Bravia TV integration."""
 
-from __future__ import annotations
-
 from collections.abc import Mapping
 from typing import Any, cast
 from urllib.parse import urlparse
@@ -11,7 +9,14 @@ from pybravia import BraviaAuthError, BraviaClient, BraviaError, BraviaNotSuppor
 import voluptuous as vol
 
 from homeassistant.config_entries import SOURCE_REAUTH, ConfigFlow, ConfigFlowResult
-from homeassistant.const import CONF_CLIENT_ID, CONF_HOST, CONF_MAC, CONF_NAME, CONF_PIN
+from homeassistant.const import (
+    ATTR_MODEL,
+    CONF_CLIENT_ID,
+    CONF_HOST,
+    CONF_MAC,
+    CONF_NAME,
+    CONF_PIN,
+)
 from homeassistant.helpers import instance_id
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
 from homeassistant.helpers.service_info.ssdp import (
@@ -25,9 +30,9 @@ from homeassistant.util.network import is_host_valid
 from .const import (
     ATTR_CID,
     ATTR_MAC,
-    ATTR_MODEL,
     CONF_NICKNAME,
     CONF_USE_PSK,
+    CONF_USE_SSL,
     DOMAIN,
     NICKNAME_PREFIX,
 )
@@ -46,11 +51,12 @@ class BraviaTVConfigFlow(ConfigFlow, domain=DOMAIN):
     def create_client(self) -> None:
         """Create Bravia TV client from config."""
         host = self.device_config[CONF_HOST]
+        ssl = self.device_config[CONF_USE_SSL]
         session = async_create_clientsession(
             self.hass,
             cookie_jar=CookieJar(unsafe=True, quote_cookie=False),
         )
-        self.client = BraviaClient(host=host, session=session)
+        self.client = BraviaClient(host=host, session=session, ssl=ssl)
 
     async def gen_instance_ids(self) -> tuple[str, str]:
         """Generate client_id and nickname."""
@@ -123,10 +129,10 @@ class BraviaTVConfigFlow(ConfigFlow, domain=DOMAIN):
         self, user_input: dict[str, Any] | None = None
     ) -> ConfigFlowResult:
         """Handle authorize step."""
-        self.create_client()
-
         if user_input is not None:
             self.device_config[CONF_USE_PSK] = user_input[CONF_USE_PSK]
+            self.device_config[CONF_USE_SSL] = user_input[CONF_USE_SSL]
+            self.create_client()
             if user_input[CONF_USE_PSK]:
                 return await self.async_step_psk()
             return await self.async_step_pin()
@@ -136,6 +142,7 @@ class BraviaTVConfigFlow(ConfigFlow, domain=DOMAIN):
             data_schema=vol.Schema(
                 {
                     vol.Required(CONF_USE_PSK, default=False): bool,
+                    vol.Required(CONF_USE_SSL, default=False): bool,
                 }
             ),
         )

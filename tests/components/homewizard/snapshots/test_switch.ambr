@@ -14,8 +14,9 @@
 # ---
 # name: test_switch_entities[HWE-KWH1-switch.device_cloud_connection-system-cloud_enabled].1
   EntityRegistryEntrySnapshot({
-    'aliases': set({
-    }),
+    'aliases': list([
+      None,
+    ]),
     'area_id': None,
     'capabilities': None,
     'config_entry_id': <ANY>,
@@ -33,6 +34,7 @@
     'labels': set({
     }),
     'name': None,
+    'object_id_base': 'Cloud connection',
     'options': dict({
     }),
     'original_device_class': None,
@@ -77,7 +79,7 @@
     'name': 'Device',
     'name_by_user': None,
     'primary_config_entry': <ANY>,
-    'serial_number': None,
+    'serial_number': '5c2fafabcdef',
     'sw_version': '3.06',
     'via_device_id': None,
   })
@@ -97,8 +99,9 @@
 # ---
 # name: test_switch_entities[HWE-KWH3-switch.device_cloud_connection-system-cloud_enabled].1
   EntityRegistryEntrySnapshot({
-    'aliases': set({
-    }),
+    'aliases': list([
+      None,
+    ]),
     'area_id': None,
     'capabilities': None,
     'config_entry_id': <ANY>,
@@ -116,6 +119,7 @@
     'labels': set({
     }),
     'name': None,
+    'object_id_base': 'Cloud connection',
     'options': dict({
     }),
     'original_device_class': None,
@@ -160,7 +164,7 @@
     'name': 'Device',
     'name_by_user': None,
     'primary_config_entry': <ANY>,
-    'serial_number': None,
+    'serial_number': '5c2fafabcdef',
     'sw_version': '3.06',
     'via_device_id': None,
   })
@@ -181,8 +185,9 @@
 # ---
 # name: test_switch_entities[HWE-SKT-11-switch.device-state-power_on].1
   EntityRegistryEntrySnapshot({
-    'aliases': set({
-    }),
+    'aliases': list([
+      None,
+    ]),
     'area_id': None,
     'capabilities': None,
     'config_entry_id': <ANY>,
@@ -200,6 +205,7 @@
     'labels': set({
     }),
     'name': None,
+    'object_id_base': None,
     'options': dict({
     }),
     'original_device_class': <SwitchDeviceClass.OUTLET: 'outlet'>,
@@ -244,7 +250,7 @@
     'name': 'Device',
     'name_by_user': None,
     'primary_config_entry': <ANY>,
-    'serial_number': None,
+    'serial_number': '5c2fafabcdef',
     'sw_version': '3.03',
     'via_device_id': None,
   })
@@ -264,8 +270,9 @@
 # ---
 # name: test_switch_entities[HWE-SKT-11-switch.device_cloud_connection-system-cloud_enabled].1
   EntityRegistryEntrySnapshot({
-    'aliases': set({
-    }),
+    'aliases': list([
+      None,
+    ]),
     'area_id': None,
     'capabilities': None,
     'config_entry_id': <ANY>,
@@ -283,6 +290,7 @@
     'labels': set({
     }),
     'name': None,
+    'object_id_base': 'Cloud connection',
     'options': dict({
     }),
     'original_device_class': None,
@@ -327,7 +335,7 @@
     'name': 'Device',
     'name_by_user': None,
     'primary_config_entry': <ANY>,
-    'serial_number': None,
+    'serial_number': '5c2fafabcdef',
     'sw_version': '3.03',
     'via_device_id': None,
   })
@@ -347,8 +355,9 @@
 # ---
 # name: test_switch_entities[HWE-SKT-11-switch.device_switch_lock-state-switch_lock].1
   EntityRegistryEntrySnapshot({
-    'aliases': set({
-    }),
+    'aliases': list([
+      None,
+    ]),
     'area_id': None,
     'capabilities': None,
     'config_entry_id': <ANY>,
@@ -366,6 +375,7 @@
     'labels': set({
     }),
     'name': None,
+    'object_id_base': 'Switch lock',
     'options': dict({
     }),
     'original_device_class': None,
@@ -410,7 +420,7 @@
     'name': 'Device',
     'name_by_user': None,
     'primary_config_entry': <ANY>,
-    'serial_number': None,
+    'serial_number': '5c2fafabcdef',
     'sw_version': '3.03',
     'via_device_id': None,
   })
@@ -431,8 +441,9 @@
 # ---
 # name: test_switch_entities[HWE-SKT-21-switch.device-state-power_on].1
   EntityRegistryEntrySnapshot({
-    'aliases': set({
-    }),
+    'aliases': list([
+      None,
+    ]),
     'area_id': None,
     'capabilities': None,
     'config_entry_id': <ANY>,
@@ -450,6 +461,7 @@
     'labels': set({
     }),
     'name': None,
+    'object_id_base': None,
     'options': dict({
     }),
     'original_device_class': <SwitchDeviceClass.OUTLET: 'outlet'>,
@@ -494,7 +506,7 @@
     'name': 'Device',
     'name_by_user': None,
     'primary_config_entry': <ANY>,
-    'serial_number': None,
+    'serial_number': '5c2fafabcdef',
     'sw_version': '4.07',
     'via_device_id': None,
   })
@@ -514,8 +526,9 @@
 # ---
 # name: test_switch_entities[HWE-SKT-21-switch.device_cloud_connection-system-cloud_enabled].1
   EntityRegistryEntrySnapshot({
-    'aliases': set({
-    }),
+    'aliases': list([
+      None,
+    ]),
     'area_id': None,
     'capabilities': None,
     'config_entry_id': <ANY>,
@@ -533,6 +546,7 @@
     'labels': set({
     }),
     'name': None,
+    'object_id_base': 'Cloud connection',
     'options': dict({
     }),
     'original_device_class': None,
@@ -577,7 +591,7 @@
     'name': 'Device',
     'name_by_user': None,
     'primary_config_entry': <ANY>,
-    'serial_number': None,
+    'serial_number': '5c2fafabcdef',
     'sw_version': '4.07',
     'via_device_id': None,
   })
@@ -597,8 +611,9 @@
 # ---
 # name: test_switch_entities[HWE-SKT-21-switch.device_switch_lock-state-switch_lock].1
   EntityRegistryEntrySnapshot({
-    'aliases': set({
-    }),
+    'aliases': list([
+      None,
+    ]),
     'area_id': None,
     'capabilities': None,
     'config_entry_id': <ANY>,
@@ -616,6 +631,7 @@
     'labels': set({
     }),
     'name': None,
+    'object_id_base': 'Switch lock',
     'options': dict({
     }),
     'original_device_class': None,
@@ -660,7 +676,7 @@
     'name': 'Device',
     'name_by_user': None,
     'primary_config_entry': <ANY>,
-    'serial_number': None,
+    'serial_number': '5c2fafabcdef',
     'sw_version': '4.07',
     'via_device_id': None,
   })
@@ -680,8 +696,9 @@
 # ---
 # name: test_switch_entities[HWE-WTR-switch.device_cloud_connection-system-cloud_enabled].1
   EntityRegistryEntrySnapshot({
-    'aliases': set({
-    }),
+    'aliases': list([
+      None,
+    ]),
     'area_id': None,
     'capabilities': None,
     'config_entry_id': <ANY>,
@@ -699,6 +716,7 @@
     'labels': set({
     }),
     'name': None,
+    'object_id_base': 'Cloud connection',
     'options': dict({
     }),
     'original_device_class': None,
@@ -743,7 +761,7 @@
     'name': 'Device',
     'name_by_user': None,
     'primary_config_entry': <ANY>,
-    'serial_number': None,
+    'serial_number': '5c2fafabcdef',
     'sw_version': '2.03',
     'via_device_id': None,
   })
@@ -763,8 +781,9 @@
 # ---
 # name: test_switch_entities[SDM230-switch.device_cloud_connection-system-cloud_enabled].1
   EntityRegistryEntrySnapshot({
-    'aliases': set({
-    }),
+    'aliases': list([
+      None,
+    ]),
     'area_id': None,
     'capabilities': None,
     'config_entry_id': <ANY>,
@@ -782,6 +801,7 @@
     'labels': set({
     }),
     'name': None,
+    'object_id_base': 'Cloud connection',
     'options': dict({
     }),
     'original_device_class': None,
@@ -826,7 +846,7 @@
     'name': 'Device',
     'name_by_user': None,
     'primary_config_entry': <ANY>,
-    'serial_number': None,
+    'serial_number': '5c2fafabcdef',
     'sw_version': '3.06',
     'via_device_id': None,
   })
@@ -846,8 +866,9 @@
 # ---
 # name: test_switch_entities[SDM630-switch.device_cloud_connection-system-cloud_enabled].1
   EntityRegistryEntrySnapshot({
-    'aliases': set({
-    }),
+    'aliases': list([
+      None,
+    ]),
     'area_id': None,
     'capabilities': None,
     'config_entry_id': <ANY>,
@@ -865,6 +886,7 @@
     'labels': set({
     }),
     'name': None,
+    'object_id_base': 'Cloud connection',
     'options': dict({
     }),
     'original_device_class': None,
@@ -909,7 +931,7 @@
     'name': 'Device',
     'name_by_user': None,
     'primary_config_entry': <ANY>,
-    'serial_number': None,
+    'serial_number': '5c2fafabcdef',
     'sw_version': '3.06',
     'via_device_id': None,
   })

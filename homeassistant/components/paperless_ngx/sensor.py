@@ -1,7 +1,5 @@
 """Sensor platform for Paperless-ngx."""
 
-from __future__ import annotations
-
 from collections.abc import Callable
 from dataclasses import dataclass
 
@@ -90,16 +88,18 @@ SENSOR_STATUS: tuple[PaperlessEntityDescription[Status], ...] = (
         native_unit_of_measurement=UnitOfInformation.GIGABYTES,
         entity_category=EntityCategory.DIAGNOSTIC,
         value_fn=(
-            lambda data: round(
-                InformationConverter().convert(
-                    data.storage.total,
-                    UnitOfInformation.BYTES,
-                    UnitOfInformation.GIGABYTES,
-                ),
-                2,
+            lambda data: (
+                round(
+                    InformationConverter().convert(
+                        data.storage.total,
+                        UnitOfInformation.BYTES,
+                        UnitOfInformation.GIGABYTES,
+                    ),
+                    2,
+                )
+                if data.storage is not None and data.storage.total is not None
+                else None
             )
-            if data.storage is not None and data.storage.total is not None
-            else None
         ),
     ),
     PaperlessEntityDescription[Status](
@@ -110,16 +110,18 @@ SENSOR_STATUS: tuple[PaperlessEntityDescription[Status], ...] = (
         native_unit_of_measurement=UnitOfInformation.GIGABYTES,
         entity_category=EntityCategory.DIAGNOSTIC,
         value_fn=(
-            lambda data: round(
-                InformationConverter().convert(
-                    data.storage.available,
-                    UnitOfInformation.BYTES,
-                    UnitOfInformation.GIGABYTES,
-                ),
-                2,
+            lambda data: (
+                round(
+                    InformationConverter().convert(
+                        data.storage.available,
+                        UnitOfInformation.BYTES,
+                        UnitOfInformation.GIGABYTES,
+                    ),
+                    2,
+                )
+                if data.storage is not None and data.storage.available is not None
+                else None
             )
-            if data.storage is not None and data.storage.available is not None
-            else None
         ),
     ),
     PaperlessEntityDescription[Status](
@@ -128,16 +130,18 @@ SENSOR_STATUS: tuple[PaperlessEntityDescription[Status], ...] = (
         device_class=SensorDeviceClass.ENUM,
         entity_category=EntityCategory.DIAGNOSTIC,
         options=[
-            item.value.lower() for item in StatusType if item != StatusType.UNKNOWN
+            item.value.lower() for item in StatusType if item is not StatusType.UNKNOWN
         ],
         value_fn=(
-            lambda data: data.database.status.value.lower()
-            if (
-                data.database is not None
-                and data.database.status is not None
-                and data.database.status != StatusType.UNKNOWN
+            lambda data: (
+                data.database.status.value.lower()
+                if (
+                    data.database is not None
+                    and data.database.status is not None
+                    and data.database.status is not StatusType.UNKNOWN
+                )
+                else None
             )
-            else None
         ),
     ),
     PaperlessEntityDescription[Status](
@@ -147,16 +151,18 @@ SENSOR_STATUS: tuple[PaperlessEntityDescription[Status], ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=False,
         options=[
-            item.value.lower() for item in StatusType if item != StatusType.UNKNOWN
+            item.value.lower() for item in StatusType if item is not StatusType.UNKNOWN
         ],
         value_fn=(
-            lambda data: data.tasks.index_status.value.lower()
-            if (
-                data.tasks is not None
-                and data.tasks.index_status is not None
-                and data.tasks.index_status != StatusType.UNKNOWN
+            lambda data: (
+                data.tasks.index_status.value.lower()
+                if (
+                    data.tasks is not None
+                    and data.tasks.index_status is not None
+                    and data.tasks.index_status is not StatusType.UNKNOWN
+                )
+                else None
             )
-            else None
         ),
     ),
     PaperlessEntityDescription[Status](
@@ -166,16 +172,18 @@ SENSOR_STATUS: tuple[PaperlessEntityDescription[Status], ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=False,
         options=[
-            item.value.lower() for item in StatusType if item != StatusType.UNKNOWN
+            item.value.lower() for item in StatusType if item is not StatusType.UNKNOWN
         ],
         value_fn=(
-            lambda data: data.tasks.classifier_status.value.lower()
-            if (
-                data.tasks is not None
-                and data.tasks.classifier_status is not None
-                and data.tasks.classifier_status != StatusType.UNKNOWN
+            lambda data: (
+                data.tasks.classifier_status.value.lower()
+                if (
+                    data.tasks is not None
+                    and data.tasks.classifier_status is not None
+                    and data.tasks.classifier_status is not StatusType.UNKNOWN
+                )
+                else None
             )
-            else None
         ),
     ),
     PaperlessEntityDescription[Status](
@@ -185,16 +193,18 @@ SENSOR_STATUS: tuple[PaperlessEntityDescription[Status], ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=False,
         options=[
-            item.value.lower() for item in StatusType if item != StatusType.UNKNOWN
+            item.value.lower() for item in StatusType if item is not StatusType.UNKNOWN
         ],
         value_fn=(
-            lambda data: data.tasks.celery_status.value.lower()
-            if (
-                data.tasks is not None
-                and data.tasks.celery_status is not None
-                and data.tasks.celery_status != StatusType.UNKNOWN
+            lambda data: (
+                data.tasks.celery_status.value.lower()
+                if (
+                    data.tasks is not None
+                    and data.tasks.celery_status is not None
+                    and data.tasks.celery_status is not StatusType.UNKNOWN
+                )
+                else None
             )
-            else None
         ),
     ),
     PaperlessEntityDescription[Status](
@@ -203,16 +213,18 @@ SENSOR_STATUS: tuple[PaperlessEntityDescription[Status], ...] = (
         device_class=SensorDeviceClass.ENUM,
         entity_category=EntityCategory.DIAGNOSTIC,
         options=[
-            item.value.lower() for item in StatusType if item != StatusType.UNKNOWN
+            item.value.lower() for item in StatusType if item is not StatusType.UNKNOWN
         ],
         value_fn=(
-            lambda data: data.tasks.redis_status.value.lower()
-            if (
-                data.tasks is not None
-                and data.tasks.redis_status is not None
-                and data.tasks.redis_status != StatusType.UNKNOWN
+            lambda data: (
+                data.tasks.redis_status.value.lower()
+                if (
+                    data.tasks is not None
+                    and data.tasks.redis_status is not None
+                    and data.tasks.redis_status is not StatusType.UNKNOWN
+                )
+                else None
             )
-            else None
         ),
     ),
     PaperlessEntityDescription[Status](
@@ -221,16 +233,18 @@ SENSOR_STATUS: tuple[PaperlessEntityDescription[Status], ...] = (
         device_class=SensorDeviceClass.ENUM,
         entity_category=EntityCategory.DIAGNOSTIC,
         options=[
-            item.value.lower() for item in StatusType if item != StatusType.UNKNOWN
+            item.value.lower() for item in StatusType if item is not StatusType.UNKNOWN
         ],
         value_fn=(
-            lambda data: data.tasks.sanity_check_status.value.lower()
-            if (
-                data.tasks is not None
-                and data.tasks.sanity_check_status is not None
-                and data.tasks.sanity_check_status != StatusType.UNKNOWN
+            lambda data: (
+                data.tasks.sanity_check_status.value.lower()
+                if (
+                    data.tasks is not None
+                    and data.tasks.sanity_check_status is not None
+                    and data.tasks.sanity_check_status is not StatusType.UNKNOWN
+                )
+                else None
             )
-            else None
         ),
     ),
 )

@@ -566,6 +566,12 @@ ZEROCONF = {
     ],
     "_http._tcp.local.": [
         {
+            "domain": "airq",
+            "properties": {
+                "device": "air-q",
+            },
+        },
+        {
             "domain": "awair",
             "name": "awair*",
         },
@@ -578,16 +584,52 @@ ZEROCONF = {
             "name": "bsb-lan*",
         },
         {
+            "domain": "duco",
+            "name": "duco [[][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][]].*",
+        },
+        {
             "domain": "eheimdigital",
             "name": "eheimdigital._http._tcp.local.",
+        },
+        {
+            "domain": "hdfury",
+            "name": "diva-*",
+        },
+        {
+            "domain": "hdfury",
+            "name": "vertex2-*",
+        },
+        {
+            "domain": "hdfury",
+            "name": "vrroom-*",
+        },
+        {
+            "domain": "homevolt",
+            "name": "homevolt*",
+        },
+        {
+            "domain": "indevolt",
+            "name": "igen_fw*",
         },
         {
             "domain": "lektrico",
             "name": "lektrico*",
         },
         {
+            "domain": "liebherr",
+            "name": "liebherr*",
+        },
+        {
             "domain": "loqed",
             "name": "loqed*",
+        },
+        {
+            "domain": "lunatone",
+            "properties": {
+                "manufacturer": "lunatone industrielle elektronik gmbh",
+                "type": "dali-2-*",
+                "uid": "*",
+            },
         },
         {
             "domain": "nam",
@@ -605,6 +647,10 @@ ZEROCONF = {
         },
         {
             "domain": "powerfox",
+            "name": "powerfox*",
+        },
+        {
+            "domain": "powerfox_local",
             "name": "powerfox*",
         },
         {
@@ -665,6 +711,11 @@ ZEROCONF = {
             "domain": "ipp",
         },
     ],
+    "_kiosker._tcp.local.": [
+        {
+            "domain": "kiosker",
+        },
+    ],
     "_kizbox._tcp.local.": [
         {
             "domain": "overkiz",
@@ -680,6 +731,9 @@ ZEROCONF = {
     "_linkplay._tcp.local.": [
         {
             "domain": "linkplay",
+        },
+        {
+            "domain": "wiim",
         },
     ],
     "_lookin._tcp.local.": [
@@ -770,6 +824,11 @@ ZEROCONF = {
             "domain": "nanoleaf",
         },
     ],
+    "_nrgkick._tcp.local.": [
+        {
+            "domain": "nrgkick",
+        },
+    ],
     "_nut._tcp.local.": [
         {
             "domain": "nut",
@@ -778,6 +837,11 @@ ZEROCONF = {
     "_octoprint._tcp.local.": [
         {
             "domain": "octoprint",
+        },
+    ],
+    "_openevse._tcp.local.": [
+        {
+            "domain": "openevse",
         },
     ],
     "_owserver._tcp.local.": [
@@ -808,6 +872,11 @@ ZEROCONF = {
     "_powerview._tcp.local.": [
         {
             "domain": "hunterdouglas_powerview",
+        },
+    ],
+    "_prana._tcp.local.": [
+        {
+            "domain": "prana",
         },
     ],
     "_printer._tcp.local.": [
@@ -884,6 +953,11 @@ ZEROCONF = {
             "domain": "cambridge_audio",
         },
     ],
+    "_solarman._tcp.local.": [
+        {
+            "domain": "solarman",
+        },
+    ],
     "_sonos._tcp.local.": [
         {
             "domain": "sonos",
@@ -920,6 +994,11 @@ ZEROCONF = {
     "_system-bridge._tcp.local.": [
         {
             "domain": "system_bridge",
+        },
+    ],
+    "_systemnexa2._tcp.local.": [
+        {
+            "domain": "systemnexa2",
         },
     ],
     "_technove-stations._tcp.local.": [

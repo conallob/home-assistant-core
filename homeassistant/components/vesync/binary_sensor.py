@@ -1,7 +1,5 @@
 """Binary Sensor for VeSync."""
 
-from __future__ import annotations
-
 from collections.abc import Callable
 from dataclasses import dataclass
 import logging
@@ -24,6 +22,8 @@ from .coordinator import VesyncConfigEntry, VeSyncDataCoordinator
 from .entity import VeSyncBaseEntity
 
 _LOGGER = logging.getLogger(__name__)
+
+PARALLEL_UPDATES = 0
 
 
 @dataclass(frozen=True, kw_only=True)

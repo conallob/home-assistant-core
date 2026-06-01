@@ -1,7 +1,5 @@
 """Base Sensor for the Xbox Integration."""
 
-from __future__ import annotations
-
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from typing import Any
@@ -18,7 +16,11 @@ from homeassistant.helpers.entity import EntityDescription
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN
-from .coordinator import ConsoleData, XboxUpdateCoordinator
+from .coordinator import (
+    ConsoleData,
+    XboxConsoleStatusCoordinator,
+    XboxPresenceCoordinator,
+)
 
 MAP_MODEL = {
     ConsoleType.XboxOne: "Xbox One",
@@ -41,7 +43,7 @@ class XboxBaseEntityDescription(EntityDescription):
     deprecated: bool | None = None
 
 
-class XboxBaseEntity(CoordinatorEntity[XboxUpdateCoordinator]):
+class XboxBaseEntity(CoordinatorEntity[XboxPresenceCoordinator]):
     """Base Sensor for the Xbox Integration."""
 
     _attr_has_entity_name = True
@@ -49,7 +51,7 @@ class XboxBaseEntity(CoordinatorEntity[XboxUpdateCoordinator]):
 
     def __init__(
         self,
-        coordinator: XboxUpdateCoordinator,
+        coordinator: XboxPresenceCoordinator,
         xuid: str,
         entity_description: XboxBaseEntityDescription,
     ) -> None:
@@ -106,7 +108,7 @@ class XboxBaseEntity(CoordinatorEntity[XboxUpdateCoordinator]):
         return super().available and self.xuid in self.coordinator.data.presence
 
 
-class XboxConsoleBaseEntity(CoordinatorEntity[XboxUpdateCoordinator]):
+class XboxConsoleBaseEntity(CoordinatorEntity[XboxConsoleStatusCoordinator]):
     """Console base entity for the Xbox integration."""
 
     _attr_has_entity_name = True
@@ -114,11 +116,11 @@ class XboxConsoleBaseEntity(CoordinatorEntity[XboxUpdateCoordinator]):
     def __init__(
         self,
         console: SmartglassConsole,
-        coordinator: XboxUpdateCoordinator,
+        coordinator: XboxConsoleStatusCoordinator,
     ) -> None:
         """Initialize the Xbox Console entity."""
 
-        super().__init__(coordinator)
+        super().__init__(coordinator, console)
         self.client = coordinator.client
         self._console = console
 
@@ -135,7 +137,12 @@ class XboxConsoleBaseEntity(CoordinatorEntity[XboxUpdateCoordinator]):
     @property
     def data(self) -> ConsoleData:
         """Return coordinator data for this console."""
-        return self.coordinator.data.consoles[self._console.id]
+        return self.coordinator.data[self._console.id]
+
+    @property
+    def available(self) -> bool:
+        """Return if entity is available."""
+        return self.coordinator.data.get(self._console.id) is not None
 
 
 def check_deprecated_entity(

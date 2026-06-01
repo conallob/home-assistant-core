@@ -1,7 +1,5 @@
 """Support for Atlantic Electrical Heater (With Adjustable Temperature Setpoint)."""
 
-from __future__ import annotations
-
 from typing import Any
 
 from pyoverkiz.enums import OverkizCommand, OverkizCommandParam, OverkizState
@@ -59,6 +57,7 @@ OVERKIZ_TO_HVAC_MODE: dict[str, HVACMode] = {
     OverkizCommandParam.STANDBY: HVACMode.OFF,  # main command
     OverkizCommandParam.AUTO: HVACMode.AUTO,
     OverkizCommandParam.EXTERNAL: HVACMode.AUTO,
+    OverkizCommandParam.PROG: HVACMode.AUTO,
     OverkizCommandParam.INTERNAL: HVACMode.AUTO,  # main command
 }
 
@@ -76,7 +75,10 @@ TEMPERATURE_SENSOR_DEVICE_INDEX = 2
 class AtlanticElectricalHeaterWithAdjustableTemperatureSetpoint(
     OverkizEntity, ClimateEntity
 ):
-    """Representation of Atlantic Electrical Heater (With Adjustable Temperature Setpoint)."""
+    """Representation of Atlantic Electrical Heater.
+
+    With Adjustable Temperature Setpoint.
+    """
 
     _attr_hvac_modes = [*HVAC_MODE_TO_OVERKIZ]
     _attr_preset_modes = [*PRESET_MODE_TO_OVERKIZ]
@@ -129,14 +131,14 @@ class AtlanticElectricalHeaterWithAdjustableTemperatureSetpoint(
         states = self.device.states
 
         if (
-            operating_mode := states[OverkizState.CORE_OPERATING_MODE]
-        ) and operating_mode.value_as_str == OverkizCommandParam.EXTERNAL:
-            return PRESET_EXTERNAL
-
-        if (
             state := states[OverkizState.IO_TARGET_HEATING_LEVEL]
         ) and state.value_as_str:
             return OVERKIZ_TO_PRESET_MODE[state.value_as_str]
+
+        if (
+            operating_mode := states[OverkizState.CORE_OPERATING_MODE]
+        ) and operating_mode.value_as_str == OverkizCommandParam.EXTERNAL:
+            return PRESET_EXTERNAL
         return None
 
     async def async_set_preset_mode(self, preset_mode: str) -> None:

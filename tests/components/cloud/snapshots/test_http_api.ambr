@@ -61,6 +61,19 @@
   
   </details>
   
+  ## Custom Themes
+  
+  Custom themes: 2
+  
+  <details><summary>Custom themes</summary>
+  
+  Name
+  ---
+  midnight
+  solarized-dark
+  
+  </details>
+  
   <details><summary>mock_no_info_integration</summary>
   
   No information available
@@ -84,6 +97,24 @@
   can_reach_cert_server | Exception: Unexpected exception
   can_reach_cloud_auth | Failed: unreachable
   can_reach_cloud | ok
+  
+  </details>
+  
+  ## Latency by location
+  
+  Location | Latency (ms)
+  --- | ---
+  Earth | 13.37
+  Moon | N/A
+  
+  ## Installed packages
+  
+  <details><summary>Installed packages</summary>
+  
+  Package | Version
+  --- | ---
+  hass-nabucasa | 1.2.3
+  homeassistant | 3.2.1
   
   </details>
   
@@ -155,6 +186,10 @@
   
   </details>
   
+  ## Custom Themes
+  
+  Custom themes: 0
+  
   <details><summary>mock_no_info_integration</summary>
   
   No information available
@@ -178,6 +213,17 @@
   can_reach_cert_server | Exception: Unexpected exception
   can_reach_cloud_auth | Failed: unreachable
   can_reach_cloud | ok
+  
+  </details>
+  
+  ## Installed packages
+  
+  <details><summary>Installed packages</summary>
+  
+  Package | Version
+  --- | ---
+  hass-nabucasa | 1.2.3
+  homeassistant | 3.2.1
   
   </details>
   
@@ -220,6 +266,10 @@
   
   Unable to collect integration information
   
+  ## Custom Themes
+  
+  Custom themes: 0
+  
   <details><summary>mock_no_info_integration</summary>
   
   No information available
@@ -243,6 +293,17 @@
   can_reach_cert_server | Exception: Unexpected exception
   can_reach_cloud_auth | Failed: unreachable
   can_reach_cloud | ok
+  
+  </details>
+  
+  ## Installed packages
+  
+  <details><summary>Installed packages</summary>
+  
+  Package | Version
+  --- | ---
+  hass-nabucasa | 1.2.3
+  homeassistant | 3.2.1
   
   </details>
   

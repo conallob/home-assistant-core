@@ -56,7 +56,7 @@ DEVICE_FIXTURES: dict[str, list[tuple[str, str, str]]] = {
         ("post", "/cloud/v2/deviceManaged/bypassV2", "air-purifier-detail.json")
     ],
     "Dimmable Light": [
-        ("post", "/cloud/v1/deviceManaged/deviceDetail", "device-detail.json")
+        ("post", "/cloud/v1/deviceManaged/deviceDetail", "dimmable-light-detail.json")
     ],
     "Temperature Light": [
         ("post", "/cloud/v1/deviceManaged/bypass", "light-detail.json")
@@ -76,6 +76,20 @@ DEVICE_FIXTURES: dict[str, list[tuple[str, str, str]]] = {
     "SmartTowerFan": [("post", "/cloud/v2/deviceManaged/bypassV2", "fan-detail.json")],
     "Humidifier 6000s": [
         ("post", "/cloud/v2/deviceManaged/bypassV2", "humidifier-6000s-detail.json")
+    ],
+    "CS158-AF Air Fryer Standby": [
+        (
+            "post",
+            "/cloud/v1/deviceManaged/bypass",
+            "air-fryer-CS158-AF-detail-standby.json",
+        )
+    ],
+    "CS158-AF Air Fryer Cooking": [
+        (
+            "post",
+            "/cloud/v1/deviceManaged/bypass",
+            "air-fryer-CS158-AF-detail-cooking.json",
+        )
     ],
 }
 

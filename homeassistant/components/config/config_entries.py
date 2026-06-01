@@ -1,7 +1,5 @@
 """Http views to control the config manager."""
 
-from __future__ import annotations
-
 from collections.abc import Callable
 from http import HTTPStatus
 import logging
@@ -150,7 +148,7 @@ def _prepare_config_flow_result_json(
     prepare_result_json: Callable[[data_entry_flow.FlowResult], dict[str, Any]],
 ) -> dict[str, Any]:
     """Convert result to JSON."""
-    if result["type"] != data_entry_flow.FlowResultType.CREATE_ENTRY:
+    if result["type"] is not data_entry_flow.FlowResultType.CREATE_ENTRY:
         return prepare_result_json(result)
 
     data = {key: val for key, val in result.items() if key not in ("data", "context")}
@@ -177,7 +175,6 @@ class ConfigManagerFlowIndexView(
         vol.Schema(
             {
                 vol.Required("handler"): vol.Any(str, list),
-                vol.Optional("show_advanced_options", default=False): cv.boolean,
                 vol.Optional("entry_id"): cv.string,
             },
             extra=vol.ALLOW_EXTRA,
@@ -304,7 +301,6 @@ class SubentryManagerFlowIndexView(
         vol.Schema(
             {
                 vol.Required("handler"): vol.All(vol.Coerce(tuple), (str, str)),
-                vol.Optional("show_advanced_options", default=False): cv.boolean,
             },
             extra=vol.ALLOW_EXTRA,
         )
@@ -421,7 +417,7 @@ def config_entries_flow_subscribe(
                 config_entries.SOURCE_USER,
             )
         ]
-    except (ValueError, TypeError):
+    except ValueError, TypeError:
         # If we can't serialize, we'll filter out unserializable flows
         serialized_flows = []
         for flw in hass.config_entries.flow.async_progress():
@@ -434,7 +430,7 @@ def config_entries_flow_subscribe(
                 serialized_flows.append(
                     json_bytes({"type": None, "flow_id": flw["flow_id"], "flow": flw})
                 )
-            except (ValueError, TypeError):
+            except ValueError, TypeError:
                 _LOGGER.error(
                     "Unable to serialize to JSON. Bad data found at %s",
                     format_unserializable_data(

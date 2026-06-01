@@ -1,7 +1,5 @@
 """Support for Velbus light."""
 
-from __future__ import annotations
-
 from typing import Any
 
 from velbusaio.channels import (
@@ -113,6 +111,7 @@ class VelbusButtonLight(VelbusEntity, LightEntity):
     _attr_color_mode = ColorMode.ONOFF
     _attr_supported_color_modes = {ColorMode.ONOFF}
     _attr_supported_features = LightEntityFeature.FLASH
+    _attr_translation_key = "button_light"
 
     def __init__(self, channel: VelbusChannel) -> None:
         """Initialize the button light (led)."""

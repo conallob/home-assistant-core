@@ -54,6 +54,7 @@ async def test_async_setup_entry__no_devices(
 ) -> None:
     """Test setup connects to vesync and creates empty config when no devices."""
     with patch.object(hass.config_entries, "async_forward_entry_setups") as setups_mock:
+        # pylint: disable-next=home-assistant-tests-direct-async-setup-entry
         assert await async_setup_entry(hass, config_entry)
         # Assert platforms loaded
         await hass.async_block_till_done()
@@ -81,6 +82,7 @@ async def test_async_setup_entry__loads_fans(
     manager._dev_list["fans"].append(fan)
 
     with patch.object(hass.config_entries, "async_forward_entry_setups") as setups_mock:
+        # pylint: disable-next=home-assistant-tests-direct-async-setup-entry
         assert await async_setup_entry(hass, config_entry)
         # Assert platforms loaded
         await hass.async_block_till_done()
@@ -129,7 +131,7 @@ async def test_migrate_config_entry(
     await hass.config_entries.async_setup(switch_old_id_config_entry.entry_id)
     await hass.async_block_till_done()
 
-    assert switch_old_id_config_entry.minor_version == 2
+    assert switch_old_id_config_entry.minor_version == 3
 
     migrated_switch = entity_registry.async_get(switch.entity_id)
     assert migrated_switch is not None
@@ -150,6 +152,8 @@ async def test_migrate_config_entry(
         e for e in entity_registry.entities.values() if e.domain == "humidifier"
     ]
     assert len(humidifier_entities) == 2
+    assert switch_old_id_config_entry.version == 1
+    assert switch_old_id_config_entry.unique_id == "TESTACCOUNTID"
 
 
 async def test_async_remove_config_entry_device_positive(
